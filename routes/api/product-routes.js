@@ -37,13 +37,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // create new product
-router.post('/', async (req, res) => {
-  try {
-    const productData = await Product.create(req.body);
-    res.status(200).json(productData);
-  } catch (err) {
-    res.status(400).json(err);
-  }
+router.post('/', (req, res) => {
 
   
   /* req.body should look like this...
@@ -118,7 +112,21 @@ router.put('/:id', (req, res) => {
     });
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
+  try {
+    const productData = await Product.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
+    if (!productData) {
+      res.status(404).json({ message: 'Product does not exist!' });
+      return;
+    }
+    res.status(200).json(productData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
   // delete one product by its `id` value
 });
 
