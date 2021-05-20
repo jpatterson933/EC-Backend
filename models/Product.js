@@ -20,7 +20,17 @@ Product.init(
     },
     price: {
       type: DataTypes.INTEGER,
-    }
+    },
+    stock: {
+      type: DataTypes.INTEGER,
+    },
+    category_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'category',
+        key: 'id',
+      },
+    },
   },
   {
     sequelize,

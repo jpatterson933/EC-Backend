@@ -15,13 +15,6 @@ Category.init(
     category_name: {
       type: DataTypes.STRING,
     },
-    product_id: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'category',
-        key: 'id',
-      },
-    },
   },
   {
     sequelize,
